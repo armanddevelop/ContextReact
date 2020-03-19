@@ -1,41 +1,67 @@
 import React from "react";
 import "./styles/header.css";
-
+import { ThemeConsumer } from "../context/ThemaContext";
 const Header = ({ title }) => {
   return (
-    <nav className="backgroudHeader">
-      <div className="nav-wrapper container">
-        <a href="#!" className="brand-logo left">
-          React Context
-        </a>
-        <ul className="nav-bar right">
-          <li>
-            <a href="#!">
-              Nallely Sarahi Aguilar
-              <span
-                className="new badge cyan text-black"
-                data-badge-caption="PREMIUM"
-              ></span>
-            </a>
-          </li>
-          <li>
-            <a href="#!" className="btn-floating waves-effect grey">
-              <i className="material-icons iconCustom">palette</i>
-            </a>
-          </li>
-          <li>
-            <a href="#!" className="btn-floating waves-effect blue">
-              <i className="material-icons iconCustom">palette</i>
-            </a>
-          </li>
-          <li>
-            <a href="#!" className="btn-floating waves-effect black">
-              <i className="material-icons iconCustom">palette</i>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <ThemeConsumer>
+      {value => {
+        let { backgroundColor, userName, changeBackGroundColor } = value;
+
+        return (
+          <nav className="backgroudHeader" style={{ backgroundColor }}>
+            <div className="nav-wrapper container">
+              <a href="#!" className="brand-logo left">
+                {title}
+              </a>
+              <ul className="nav-bar right">
+                <li>
+                  <a href="#!">
+                    {userName}
+                    <span
+                      className="new badge cyan text-black"
+                      data-badge-caption="PREMIUM"
+                    ></span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#!"
+                    className="btn-floating waves-effect grey"
+                    onClick={changeBackGroundColor}
+                  >
+                    <i name="grey" className="material-icons iconCustom">
+                      palette
+                    </i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#!"
+                    className="btn-floating waves-effect blue"
+                    onClick={changeBackGroundColor}
+                  >
+                    <i name="blue" className="material-icons iconCustom">
+                      palette
+                    </i>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#!"
+                    className="btn-floating waves-effect black"
+                    onClick={changeBackGroundColor}
+                  >
+                    <i name="black" className="material-icons iconCustom">
+                      palette
+                    </i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        );
+      }}
+    </ThemeConsumer>
   );
 };
 
