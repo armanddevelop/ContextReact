@@ -5,7 +5,12 @@ const Header = ({ title }) => {
   return (
     <ThemeConsumer>
       {value => {
-        let { backgroundColor, userName, changeBackGroundColor } = value;
+        let {
+          backgroundColor,
+          userName,
+          changeBackGroundColor,
+          premium
+        } = value;
 
         return (
           <nav className={backgroundColor}>
@@ -17,17 +22,21 @@ const Header = ({ title }) => {
                 <li>
                   <a href="#!">
                     {userName}
-                    <span
-                      className="new badge cyan text-black"
-                      data-badge-caption="PREMIUM"
-                    ></span>
+                    {premium && (
+                      <span
+                        className="new badge cyan text-black"
+                        data-badge-caption="PREMIUM"
+                      ></span>
+                    )}
                   </a>
                 </li>
                 <li>
                   <a
                     href="#!"
                     className="btn-floating waves-effect grey"
-                    onClick={()=>{changeBackGroundColor("grey")}}
+                    onClick={() => {
+                      changeBackGroundColor("grey");
+                    }}
                   >
                     <i name="grey" className="material-icons iconCustom">
                       palette
@@ -38,7 +47,9 @@ const Header = ({ title }) => {
                   <a
                     href="#!"
                     className="btn-floating waves-effect blue"
-                    onClick={()=>{changeBackGroundColor("blue")}}
+                    onClick={() => {
+                      changeBackGroundColor("blue");
+                    }}
                   >
                     <i name="blue" className="material-icons iconCustom">
                       palette
@@ -49,7 +60,9 @@ const Header = ({ title }) => {
                   <a
                     href="#!"
                     className="btn-floating waves-effect black"
-                    onClick={()=>{changeBackGroundColor("black")}}
+                    onClick={() => {
+                      changeBackGroundColor("black");
+                    }}
                   >
                     <i name="black" className="material-icons iconCustom">
                       palette

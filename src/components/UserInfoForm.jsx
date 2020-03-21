@@ -11,6 +11,24 @@ export class UserInfoForm extends Component {
     },
     editMode: false
   };
+  componentDidMount() {
+    const _editContext = () => {
+      this.context.setNameHeader(this.state.user.name);
+      this.context.setPremium(this.state.user.premium);
+    };
+    this.setState(
+      {
+        user: {
+          name: "Armando Salamanca Ayon",
+          age: 33,
+          premium: false,
+          email: "asalamanca.ayon@gmail.com"
+        }
+      },
+      _editContext
+    );
+  }
+
   _handleChange = e => {
     let { user } = this.state;
     let { value, name } = e.target;
@@ -31,31 +49,30 @@ export class UserInfoForm extends Component {
       editMode
     });
   };
-  _handleSubmit = e=>{
+  _handleSubmit = e => {
     e.preventDefault();
     let { user, editMode } = this.state;
     console.log(user);
-    this.context.showNameHeader(user.name);
+    this.context.setNameHeader(user.name);
+    this.context.setPremium(user.premium);
     editMode = !editMode;
     this.setState({
       editMode
     });
-  }
+  };
+
   render() {
     let { name, age, premium, email } = this.state.user;
     let { editMode } = this.state;
     return (
       <ThemeConsumer>
         {value => {
-          let {backgroundColor} = value;
+          let { backgroundColor } = value;
           console.log("value desde UserInfoForm", value);
           return (
             <div className="row">
               {editMode ? (
-                <form
-                  className="col s12"
-                  onSubmit={this._handleSubmit}
-                >
+                <form className="col s12" onSubmit={this._handleSubmit}>
                   <div className="row">
                     {/*email input*/}
                     <div className="input-field col s12">
@@ -117,7 +134,7 @@ export class UserInfoForm extends Component {
                     <div className="input-field col s12">
                       <input
                         style={{ width: "100%", marginTop: 25 }}
-                        className={ backgroundColor +" btn waves-effect"}
+                        className={backgroundColor + " btn waves-effect"}
                         type="submit"
                         value="Guardar Cambios"
                       />
@@ -166,7 +183,9 @@ export class UserInfoForm extends Component {
                   <div className="row">
                     <div className="col">
                       <button
-                        className={backgroundColor + " btn btn-small waves-effect left"}
+                        className={
+                          backgroundColor + " btn btn-small waves-effect left"
+                        }
                         onClick={this._hanlderChangeMode}
                       >
                         Editar
@@ -182,5 +201,5 @@ export class UserInfoForm extends Component {
     );
   }
 }
-UserInfoForm.contextType  =ThemeContext;
+UserInfoForm.contextType = ThemeContext;
 export default UserInfoForm;

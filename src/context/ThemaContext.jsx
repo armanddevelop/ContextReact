@@ -12,16 +12,20 @@ export class ThemeProvider extends Component {
     premium: false
   };
   _changeBackGroundColor = color => {
-    
-    
     this.setState({
       backgroundColor: color
     });
   };
-  _showNameHeader = name => {
+  _setNameHeader = name => {
     console.log("valor de name desde ThemaContext", name);
     this.setState({
       userName: name
+    });
+  };
+  _setPremium = premium => {
+    console.log("valor de premium desde ThemaContext", premium);
+    this.setState({
+      premium
     });
   };
   render() {
@@ -34,7 +38,8 @@ export class ThemeProvider extends Component {
           userName,
           premium,
           changeBackGroundColor: this._changeBackGroundColor,
-          showNameHeader: this._showNameHeader
+          setNameHeader: this._setNameHeader,
+          setPremium: this._setPremium
         }}
       >
         {children}
