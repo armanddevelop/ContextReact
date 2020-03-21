@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ThemeConsumer } from "../context/ThemaContext";
+import ThemeContext, { ThemeConsumer } from "../context/ThemaContext";
 
 export class UserInfoForm extends Component {
   state = {
@@ -31,30 +31,30 @@ export class UserInfoForm extends Component {
       editMode
     });
   };
+  _handleSubmit = e=>{
+    e.preventDefault();
+    let { user, editMode } = this.state;
+    console.log(user);
+    this.context.showNameHeader(user.name);
+    editMode = !editMode;
+    this.setState({
+      editMode
+    });
+  }
   render() {
     let { name, age, premium, email } = this.state.user;
     let { editMode } = this.state;
     return (
       <ThemeConsumer>
         {value => {
+          let {backgroundColor} = value;
           console.log("value desde UserInfoForm", value);
-          let { showNameHeader } = value;
-
           return (
             <div className="row">
               {editMode ? (
                 <form
                   className="col s12"
-                  onSubmit={e => {
-                    e.preventDefault();
-                    let { user, editMode } = this.state;
-                    console.log(user);
-                    showNameHeader(user.name);
-                    editMode = !editMode;
-                    this.setState({
-                      editMode
-                    });
-                  }}
+                  onSubmit={this._handleSubmit}
                 >
                   <div className="row">
                     {/*email input*/}
@@ -117,7 +117,7 @@ export class UserInfoForm extends Component {
                     <div className="input-field col s12">
                       <input
                         style={{ width: "100%", marginTop: 25 }}
-                        className={"btn waves-effect"}
+                        className={ backgroundColor +" btn waves-effect"}
                         type="submit"
                         value="Guardar Cambios"
                       />
@@ -166,7 +166,7 @@ export class UserInfoForm extends Component {
                   <div className="row">
                     <div className="col">
                       <button
-                        className="btn btn-small wave-effect left"
+                        className={backgroundColor + " btn btn-small waves-effect left"}
                         onClick={this._hanlderChangeMode}
                       >
                         Editar
@@ -182,5 +182,5 @@ export class UserInfoForm extends Component {
     );
   }
 }
-
+UserInfoForm.contextType  =ThemeContext;
 export default UserInfoForm;

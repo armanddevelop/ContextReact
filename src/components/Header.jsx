@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/header.css";
+//import "./styles/header.css";
 import { ThemeConsumer } from "../context/ThemaContext";
 const Header = ({ title }) => {
   return (
@@ -8,7 +8,7 @@ const Header = ({ title }) => {
         let { backgroundColor, userName, changeBackGroundColor } = value;
 
         return (
-          <nav className="backgroudHeader" style={{ backgroundColor }}>
+          <nav className={backgroundColor}>
             <div className="nav-wrapper container">
               <a href="#!" className="brand-logo left">
                 {title}
@@ -27,7 +27,7 @@ const Header = ({ title }) => {
                   <a
                     href="#!"
                     className="btn-floating waves-effect grey"
-                    onClick={changeBackGroundColor}
+                    onClick={()=>{changeBackGroundColor("grey")}}
                   >
                     <i name="grey" className="material-icons iconCustom">
                       palette
@@ -38,7 +38,7 @@ const Header = ({ title }) => {
                   <a
                     href="#!"
                     className="btn-floating waves-effect blue"
-                    onClick={changeBackGroundColor}
+                    onClick={()=>{changeBackGroundColor("blue")}}
                   >
                     <i name="blue" className="material-icons iconCustom">
                       palette
@@ -49,7 +49,7 @@ const Header = ({ title }) => {
                   <a
                     href="#!"
                     className="btn-floating waves-effect black"
-                    onClick={changeBackGroundColor}
+                    onClick={()=>{changeBackGroundColor("black")}}
                   >
                     <i name="black" className="material-icons iconCustom">
                       palette

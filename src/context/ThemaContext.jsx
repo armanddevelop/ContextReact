@@ -7,15 +7,15 @@ export const ThemeConsumer = ThemeContext.Consumer;
 
 export class ThemeProvider extends Component {
   state = {
-    backgroundColor: "",
+    backgroundColor: "blue",
     userName: "",
     premium: false
   };
-  _changeBackGroundColor = e => {
-    let color = e.target;
-    let nameColor = color.getAttribute("name");
+  _changeBackGroundColor = color => {
+    
+    
     this.setState({
-      backgroundColor: nameColor
+      backgroundColor: color
     });
   };
   _showNameHeader = name => {
